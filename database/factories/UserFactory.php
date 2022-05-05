@@ -19,10 +19,15 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'slug' => $this->faker->slug(),
             'email' => $this->faker->unique()->safeEmail(),
+            'phone' => $this->faker->e164PhoneNumber(),
+            'address' => $this->faker->address(),
+            'profile_image' => $this->faker->image('public/storage/images/users', 250, 250, null, false),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'is_active' => $this->faker->randomElement([true, false]),
         ];
     }
 
