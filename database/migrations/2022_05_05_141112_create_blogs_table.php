@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('blogs', function (Blueprint $table) {
-            $table->id()->unsigned();
+            $table->id();
             $table->string('title');
             $table->string('author_name')->nullable();
             $table->longText('summary')->nullable();
@@ -31,9 +31,9 @@ return new class extends Migration
 
             $table->boolean('is_active')->default(true);
 
-            $table->bigInteger('blog_category_id')->unsigned();
+            $table->foreignId('blog_category_id');
             $table->foreign('blog_category_id')->references('id')->on('blog_categories');
-            $table->bigInteger('admin_id')->unsigned();
+            $table->foreignId('admin_id');
             $table->foreign('admin_id')->references('id')->on('admins');
 
             $table->softDeletes();

@@ -18,10 +18,10 @@
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>Product Management</h2>
+                <h2>Product Sub Categories Management</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="index.html">Product</a>
+                        <a href="index.html">Sub Categories</a>
                     </li>
                     <li class="active">
                         <strong>List</strong>
@@ -30,7 +30,7 @@
             </div>
             <div class="col-sm-8">
                 <div class="title-action">
-                    <a href="{{ route('admin.product.create') }}" class="btn btn-primary">+ Create New</a>
+                    <a href="{{ route('admin.product.sub-category.create') }}" class="btn btn-primary">+ Create New</a>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>List of created products.</h5>
+                            <h5>Product Sub Category are listed here.</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -66,38 +66,26 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>ID</th>
                                             <th>Name</th>
-                                            <th>Summary</th>
-                                            <th>Industry / Page</th>
-                                            <th>Date</th>
-                                            <th>Status</th>
+                                            <th>Main Category</th>
+                                            <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($products as $product)
-                                            <tr class="gradeX" id="row-{{ $product->id }}">
+                                        @foreach ($productSubCategories as $category)
+                                            <tr class="gradeX" id="row-{{ $category->id }}">
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td> {{ $product->id }} </td>
-                                                <td>{{ $product->name }}</td>
-                                                <td>{{ $product->summary }}</td>
-                                                <td>{{ $product->category->name }}</td>
-                                                <td>{{ date('d-M-Y', strtotime($product->created_at)) }}</td>
-                                                <td>
-                                                    @if ($product->is_active)
-                                                        <span class="label label-primary">Enable</span>
-                                                    @else
-                                                        <span class="label label-danger">Disabled</span>
-                                                    @endif
-                                                </td>
+                                                <td>{{ $category->name }}</td>
+                                                <td>{{ $category->category->name }}</td>
+                                                <td>{{ date('d-M-Y', strtotime($category->created_at)) }}</td>
+
+
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <a target="_blank" href="{{ route('product.show', [$product->industry, $product]) }}"
-                                                            class="btn-white btn btn-xs">View</a>
-                                                        <a href="{{ route('admin.product.edit', $product) }}"
+                                                        <a href="{{ route('admin.product.sub-category.edit', $category) }}"
                                                             class="btn-white btn btn-xs">Edit</a>
-                                                        <button onclick="deleteRecord({{ $product->id }})"
+                                                        <button onclick="deleteRecord({{ $category->id }})"
                                                             class="btn-white btn btn-xs">Delete</button>
                                                     </div>
                                                 </td>
@@ -108,12 +96,9 @@
                                     <tfoot>
                                         <tr>
                                             <th>No.</th>
-                                            <th>ID</th>
                                             <th>Name</th>
-                                            <th>Summary</th>
-                                            <th>Industry / Page</th>
-                                            <th>Date</th>
-                                            <th>Status</th>
+                                            <th>Main Category</th>
+                                            <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -139,6 +124,7 @@
             $('.dataTables-example').DataTable({
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
+
 
                     {
                         extend: 'print',
@@ -181,7 +167,7 @@
         function deleteRecord(id) {
             swal({
                 title: "Are you sure?",
-                text: "You will not be able to recover this record !",
+                text: "Deleting this category will also delete its all blogs !",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -193,7 +179,7 @@
                     data: {
                         "_token": "{{ csrf_token() }}"
                     },
-                    url: "{{ route('admin.product.destroy', '') }}/" + id,
+                    url: "{{ route('admin.product.sub-category.destroy', '') }}/" + id,
                     success: function(response) {
                         console.log(response);
                         if (response.success) {

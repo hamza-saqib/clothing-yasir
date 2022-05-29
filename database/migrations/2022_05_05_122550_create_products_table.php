@@ -14,27 +14,33 @@ return new class extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id()->unsigned();
+            $table->id();
             $table->string('name');
-            $table->decimal('price', 12, 2)->unsigned()->default(0);
-            $table->decimal('discount', 12, 2)->unsigned()->default(0);
+            $table->decimal('price', 12, 2)->unsigned()->default(0.00);
+            $table->decimal('discount', 12, 2)->unsigned()->default(0.00);
+            $table->decimal('tax', 12, 2)->unsigned()->default(0.00);
             $table->longText('summary')->nullable();
             $table->longText('description')->nullable();
-            $table->integer('opening_qty')->nullable()->default(0);
-            $table->integer('available_qty')->nullable()->default(0);
+            $table->integer('opening_qty')->default(0);
+            $table->integer('available_qty')->default(0);
             $table->string('slug')->unique();
+            $table->integer('sort_order')->default(0);
+            $table->string('status')->nullable();
+            $table->string('brand')->nullable();
             $table->json('images')->nullable();
+            $table->json('sizes')->nullable();
+            $table->json('colors')->nullable();
             $table->longText('meta_tag_title')->nullable();
             $table->longText('meta_tag_keywords')->nullable();
             $table->longText('meta_tag_description')->nullable();
 
             $table->boolean('is_active')->default(false);
 
-            $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('product_categories');
-            $table->bigInteger('sub_category_id')->nullable()->unsigned();
-            $table->foreign('sub_category_id')->references('id')->on('product_sub_categories');
-            $table->bigInteger('admin_id')->unsigned();
+            $table->foreignId('product_category_id');
+            $table->foreign('product_category_id')->references('id')->on('product_categories');
+            $table->foreignId('product_sub_category_id')->nullable();
+            $table->foreign('product_sub_category_id')->references('id')->on('product_sub_categories');
+            $table->foreignId('admin_id');
             $table->foreign('admin_id')->references('id')->on('admins');
 
             $table->softDeletes();

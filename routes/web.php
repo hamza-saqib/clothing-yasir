@@ -30,7 +30,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
         Route::get('/', 'index');
     });
 
-    // Route::resource('products', App\Http\Controllers\Adminpanel\ProductController::class);
+    // product
     Route::controller(App\Http\Controllers\Adminpanel\ProductController::class)->prefix('products')->name('product.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
@@ -39,6 +39,30 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
         Route::get('/{product}/edit', 'edit')->name('edit');
         Route::put('/{product}', 'update')->name('update');
         Route::delete('/{product:id}', 'destroy')->name('destroy');
+
+        //category
+        Route::controller(App\Http\Controllers\Adminpanel\ProductCategoryController::class)
+            ->prefix('category')->name('category.')->group(function () {
+            Route::get('/index', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/{productCategory}/show', 'show')->name('show');
+            Route::get('/{productCategory}/edit', 'edit')->name('edit');
+            Route::put('/{id}', 'update')->name('update');
+            Route::delete('/{productCategory:id}', 'destroy')->name('destroy');
+        });
+
+        //sub-category
+        Route::controller(App\Http\Controllers\Adminpanel\ProductSubCategoryController::class)
+            ->prefix('sub-category')->name('sub-category.')->group(function () {
+            Route::get('/index', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/{productSubCategory}/show', 'show')->name('show');
+            Route::get('/{productSubCategory}/edit', 'edit')->name('edit');
+            Route::put('/{id}', 'update')->name('update');
+            Route::delete('/{productSubCategory:id}', 'destroy')->name('destroy');
+        });
     });
 
     // user

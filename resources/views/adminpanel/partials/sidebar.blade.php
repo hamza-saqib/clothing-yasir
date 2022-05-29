@@ -35,7 +35,7 @@
 
             </li>
             <li class="@if (request()->is('admin/product*'))  {{'active'}} @else {{''}} @endif">
-                <a href="#">
+                <a href="{{ route('admin.product.create') }}">
                     <i class=" fa fa-cube"></i>
                     <span class="nav-label">Products</span>
                     <span class="fa arrow"></span>
@@ -43,6 +43,8 @@
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{ route('admin.product.create') }}">Create</a></li>
                     <li><a href="{{ route('admin.product.index') }}">List</a></li>
+                    <li><a href="{{ route('admin.product.category.index') }}">Categories</a></li>
+                    <li><a href="{{ route('admin.product.sub-category.index') }}">Sub Categories</a></li>
                 </ul>
             </li>
 

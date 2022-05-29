@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_categories', function (Blueprint $table) {
-            $table->id()->unsigned();
+            $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
 
-            $table->bigInteger('created_by')->unsigned();
-            $table->foreign('created_by')->references('id')->on('admins');
+            $table->foreignId('admin_id');
+            $table->foreign('admin_id')->references('id')->on('admins');
 
             $table->softDeletes();
             $table->timestamps();

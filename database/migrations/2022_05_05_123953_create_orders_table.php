@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id()->unsigned();
+            $table->id();
             $table->decimal('total_amount', 12, 2)->unsigned()->default(0.00);
             $table->decimal('coupon_amount', 12, 2)->unsigned()->default(0.00);
             $table->decimal('tax_amount', 12, 2)->unsigned()->default(0.00);
@@ -32,11 +32,11 @@ return new class extends Migration
             $table->boolean('is_canceled')->default(false);
             $table->boolean('is_another_shiping_address')->default(false);
 
-            $table->bigInteger('user_id')->unsigned();
+            $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->bigInteger('coupon_id')->unsigned()->nullable();
+            $table->foreignId('coupon_id')->nullable();
             $table->foreign('coupon_id')->references('id')->on('coupons');
-            $table->bigInteger('admin_id')->unsigned()->nullable();
+            $table->foreignId('admin_id')->nullable();
             $table->foreign('admin_id')->references('id')->on('admins');
 
             $table->timestamp('delivered_at')->nullable();

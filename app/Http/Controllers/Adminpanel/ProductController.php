@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Adminpanel;
 use App\Http\Controllers\Controller;
 use App\Models\Industry;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -17,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('industry', 'creator')->orderby('id', 'desc')->get();
+        $products = Product::orderby('id', 'desc')->get();
         return view('adminpanel.pages.product.index', compact('products'));
     }
 
@@ -28,8 +30,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $industries = Industry::all();
-        return view('adminpanel.pages.product.create', compact('industries'));
+        $categories = ProductCategory::all();
+        return view('adminpanel.pages.product.create', compact('categories'));
     }
 
     /**
@@ -40,58 +42,51 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request->all();
+        // return $request->all();
         $this->validate($request, [
-            'name' => 'string|required',
-            'style' => 'string',
-            'description' => 'string',
-            'image1' => 'file|required',
-            'image2' => 'file|required',
-            'image3' => 'file|required',
-            'image4' => 'file',
-            'image5' => 'file',
-            'industry_id' => 'exists:industries,id',
-
+            'name' => 'required|string',
+            'product_category_id' => 'required|integer',
+            'description' => 'nullable|string',
         ]);
 
         $input = $request->input();
 
-        if ($request->hasFile('image1')) {
-            $image = $request->file('image1');
-            $name=time().'_'.$image->getClientOriginalName();
-            $image->move(public_path().'/storage/images/products', $name);
-            $input['image1'] = $name;
-        }
+        // if ($request->hasFile('image1')) {
+        //     $image = $request->file('image1');
+        //     $name=time().'_'.$image->getClientOriginalName();
+        //     $image->move(public_path().'/storage/images/products', $name);
+        //     $input['image1'] = $name;
+        // }
 
-        if ($request->hasFile('image2')) {
-            $image = $request->file('image2');
-            $name=time().'_'.$image->getClientOriginalName();
-            $image->move(public_path().'/storage/images/products', $name);
-            $input['image2'] = $name;
-        }
+        // if ($request->hasFile('image2')) {
+        //     $image = $request->file('image2');
+        //     $name=time().'_'.$image->getClientOriginalName();
+        //     $image->move(public_path().'/storage/images/products', $name);
+        //     $input['image2'] = $name;
+        // }
 
-        if ($request->hasFile('image3')) {
-            $image = $request->file('image3');
-            $name=time().'_'.$image->getClientOriginalName();
-            $image->move(public_path().'/storage/images/products', $name);
-            $input['image3'] = $name;
-        }
+        // if ($request->hasFile('image3')) {
+        //     $image = $request->file('image3');
+        //     $name=time().'_'.$image->getClientOriginalName();
+        //     $image->move(public_path().'/storage/images/products', $name);
+        //     $input['image3'] = $name;
+        // }
 
-        if ($request->hasFile('image4')) {
-            $image = $request->file('image4');
-            $name=time().'_'.$image->getClientOriginalName();
-            $image->move(public_path().'/storage/images/products', $name);
-            $input['image4'] = $name;
-        }
+        // if ($request->hasFile('image4')) {
+        //     $image = $request->file('image4');
+        //     $name=time().'_'.$image->getClientOriginalName();
+        //     $image->move(public_path().'/storage/images/products', $name);
+        //     $input['image4'] = $name;
+        // }
 
-        if ($request->hasFile('image5')) {
-            $image = $request->file('image5');
-            $name=time().'_'.$image->getClientOriginalName();
-            $image->move(public_path().'/storage/images/products', $name);
-            $input['image5'] = $name;
-        }
+        // if ($request->hasFile('image5')) {
+        //     $image = $request->file('image5');
+        //     $name=time().'_'.$image->getClientOriginalName();
+        //     $image->move(public_path().'/storage/images/products', $name);
+        //     $input['image5'] = $name;
+        // }
 
-        $input['admin_id'] = 1;
+        $input['admin_id'] = Auth::id();
         $input['slug'] = Str::slug($request->name);
 
         Product::create($input);
@@ -118,9 +113,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $industries = Industry::all();
-        $product = Product::findOrFail($product->id);
-        return view('adminpanel.pages.product.edit', compact('industries', 'product'));
+        $categories = ProductCategory::all();
+        return view('adminpanel.pages.product.edit', compact('categories', 'product'));
     }
 
     /**

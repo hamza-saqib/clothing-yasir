@@ -18,9 +18,8 @@
     <!-- Gritter -->
     <link href="{{ asset('assets/adminpanel') }}/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 
-    <link href="{{ asset('assets/adminpanel') }}/css/animate.css" rel="stylesheet">
-
-    <link href="{{ asset('assets/adminpanel') }}/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
+    <link
+        href="{{ asset('assets/adminpanel') }}/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
         rel="stylesheet">
 
     <link href="{{ asset('assets/adminpanel') }}/css/plugins/summernote/summernote.css" rel="stylesheet">
@@ -33,8 +32,10 @@
     <!-- datatable -->
     <link href="{{ asset('assets/adminpanel') }}/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
 
+    @yield('other-css')
+
+    <link href="{{ asset('assets/adminpanel') }}/css/animate.css" rel="stylesheet">
     <link href="{{ asset('assets/adminpanel') }}/css/style.css" rel="stylesheet">
 
-    @yield('other-css')
 
 </head>

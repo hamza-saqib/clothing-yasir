@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('order_details', function (Blueprint $table) {
-            $table->id()->unsigned();
+            $table->id();
             $table->integer('qty');
             $table->decimal('unit_price', 12, 2)->unsigned()->default(0.00);
             $table->decimal('total_amount', 12, 2)->unsigned()->default(0.00);
-            $table->bigInteger('product_id')->unsigned();
+            $table->foreignId('product_id');
             $table->foreign('product_id')->references('id')->on('products');
-            $table->bigInteger('order_id')->unsigned();
+            $table->foreignId('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
 
             $table->softDeletes();

@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('wishlists', function (Blueprint $table) {
-            $table->id()->unsigned();
-            $table->bigInteger('product_id')->unsigned();
+            $table->id();
+            $table->foreignId('product_id');
             $table->foreign('product_id')->references('id')->on('products');
-            $table->bigInteger('user_id')->unsigned();
+            $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->softDeletes();
