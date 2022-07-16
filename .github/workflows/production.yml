@@ -19,3 +19,5 @@ jobs:
         username: ${{ secrets.FTP_USER_NAME }}
         password: ${{ secrets.FTP_USER_PASSWORD }}
         # server-dir: /clothing.wayneincorporation.com/
+    - name: Install Dependencies
+      run: composer install --optimize-autoloader --no-dev
