@@ -4,35 +4,18 @@ on:
     branches:
       - main
 jobs:
-  # web-deploy:
-  #   name: Deploy
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: 🚚 Get latest code
-  #     uses: actions/checkout@v2.3.2
-
-  #   - name: 📂 Sync files using FTP
-  #     uses: SamKirkland/FTP-Deploy-Action@4.0.0
-  #     with:
-  #       # server: premium231.web-hosting.com
-  #       server: ftp.wayneincorporation.com
-  #       username: ${{ secrets.FTP_USER_NAME }}
-  #       password: ${{ secrets.FTP_USER_PASSWORD }}
-  #       # server-dir: /clothing.wayneincorporation.com/
-  laravel-tests:
-    name: Config Laravel
+  web-deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2.3.2
 
-    - name: Install Dependencies
-      run: composer install --optimize-autoloader --no-dev
-
-    - name: Generate key
-      run: php artisan key:generate
-
-    - name: Optimizing Configuration Loading
-      run: php artisan config:cache
-
-    - name: Optimizing Route Loading
-      run: php artisan route:cache
+    - name: 📂 Sync files using FTP
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        # server: premium231.web-hosting.com
+        server: ftp.wayneincorporation.com
+        username: ${{ secrets.FTP_USER_NAME }}
+        password: ${{ secrets.FTP_USER_PASSWORD }}
+        # server-dir: /clothing.wayneincorporation.com/
