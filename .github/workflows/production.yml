@@ -1,5 +1,4 @@
 name: Deploy on Production
-description: "this workflow deploy/sync your file from github to your shared hosting server specefied by FTP"
 on:
   push:
     branches:
