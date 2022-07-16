@@ -11,6 +11,9 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2.3.2
 
+    - name: Install Dependencies
+      run: composer install --optimize-autoloader --no-dev
+      
     - name: 📂 Sync files using FTP
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
@@ -19,5 +22,3 @@ jobs:
         username: ${{ secrets.FTP_USER_NAME }}
         password: ${{ secrets.FTP_USER_PASSWORD }}
         # server-dir: /clothing.wayneincorporation.com/
-    - name: Install Dependencies
-      run: composer install --optimize-autoloader --no-dev
