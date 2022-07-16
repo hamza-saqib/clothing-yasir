@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
         $this->makeDirectories();
 
         $this->call(AdminSeeder::class);
+        $this->call(ProductCategorySeeder::class);
+        $this->call(ProductSubCategorySeeder::class);
         // $this->call(BlogCategorySeeder::class);
         // $this->call(BlogSeeder::class);
         // $this->call(UserSeeder::class);

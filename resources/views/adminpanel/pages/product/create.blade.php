@@ -70,12 +70,13 @@
                                                 <div class="col-sm-10">
                                                     <select id="" name="product_category_id" class="form-control"
                                                         required>
-                                                        <option selected disabled value="">Category</option>
+                                                        <option selected disabled value="">Select</option>
                                                         @foreach ($categories as $category)
                                                             <option value="{{ $category->id }}">{{ $category->name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
+
                                                     @error('product_category_id')
                                                         <span class="help-block m-b-none">Category is Required</span>
                                                     @enderror
@@ -99,19 +100,19 @@
                                             </div>
                                             <div class="form-group"><label class="col-sm-2 control-label">Price:</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" name="price" class="form-control"
-                                                        placeholder="160.00">
+                                                    <input type="number" name="price" class="form-control"
+                                                        placeholder="160.00" value="{{ old('price') ? old('price') : 0 }}">
                                                 </div>
                                             </div>
                                             <div class="form-group"><label class="col-sm-2 control-label">Brand:</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" name="brand" class="form-control"
-                                                        placeholder="Optional">
+                                                        placeholder="Optional" value="{{ old('brand') }}">
                                                 </div>
                                             </div>
                                             <div class="form-group"><label class="col-sm-2 control-label">Short Summary:</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" name="summary" class="form-control"
+                                                    <input type="text" name="" class="form-control" value="{{ old('summary') }}"
                                                         placeholder="Optional">
                                                 </div>
                                             </div>
@@ -155,7 +156,7 @@
                                             <div class="form-group"><label
                                                     class="col-sm-2 control-label">Quantity:</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" name="available_qty" value="{{ old('available_qty') }}"
+                                                    <input type="number" name="available_qty" value="{{ old('available_qty') ? old('available_qty') : 0 }}"
                                                         class="form-control" placeholder="10">
                                                 </div>
                                             </div>
@@ -163,22 +164,21 @@
                                             <div class="form-group"><label
                                                     class="col-sm-2 control-label">Discount:</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" value="{{ old('discount') }}" name="discount"
+                                                    <input type="text" value="{{ old('discount') ? old('discount') : 0 }}" name="discount"
                                                         class="form-control" placeholder="Optional">
                                                 </div>
                                             </div>
 
                                             <div class="form-group"><label class="col-sm-2 control-label">Tax:</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" value="{{ old('tax') }}"
+                                                    <input type="text" value="{{ old('tax') ?  old('tax') : 0}}"
                                                         class="form-control" name="tax" placeholder="Optional">
                                                 </div>
                                             </div>
 
-                                            <div class="form-group"><label class="col-sm-2 control-label">Sort
-                                                    order:</label>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Sort order:</label>
                                                 <div class="col-sm-10">
-                                                    <input type="number" value="{{ old('description') }}"
+                                                    <input type="number" value="{{ old('sort_order') ?  old('sort_order') : 0}}"
                                                         name="sort_order" class="form-control" placeholder="0">
                                                 </div>
                                             </div>
@@ -193,28 +193,28 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="form-group"><label
-                                                class="col-sm-2 control-label">Sizes:</label>
-                                            <div class="col-sm-10">
-                                                <select class="form-control" name="sizes[]">
-                                                    <option selected value="">Optional</option>
-                                                    <option value="Large">Large</option>
-                                                    <option value="Meduim">Meduim</option>
-                                                    <option value="Small">Small</option>
-                                                </select>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Sizes:</label>
+                                                <div class="col-sm-10">
+                                                    <select class="form-control" name="sizes[]">
+                                                        <option selected value="">Optional</option>
+                                                        <option value="Large">Large</option>
+                                                        <option value="Meduim">Meduim</option>
+                                                        <option value="Small">Small</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="form-group"><label
                                                 class="col-sm-2 control-label">Colors:</label>
-                                            <div class="col-sm-10">
-                                                <select class="form-control" name="colors[]">
-                                                    <option selected value="">Optional</option>
-                                                    <option value="Red">Red</option>
-                                                    <option value="Blue">Blue</option>
-                                                    <option value="Green">Green</option>
-                                                </select>
+                                                <div class="col-sm-10">
+                                                    <select class="form-control" name="colors[]">
+                                                        <option selected value="">Optional</option>
+                                                        <option value="Red">Red</option>
+                                                        <option value="Blue">Blue</option>
+                                                        <option value="Green">Green</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                        </div>
                                         </fieldset>
 
 
@@ -249,145 +249,18 @@
                                 </div>
                                 <div id="tab-4" class="tab-pane">
                                     <div class="panel-body">
-                                        <div class="form-group"><label class="col-sm-2 control-label">Images:</label>
-                                        <div class="col-sm-10"><input name="images[]"
-                                                value="{{ old('meta_tag_keywords') }}" type="file"
-                                                class="form-control" multiple accept="image/*" placeholder="Lorem, Ipsum, has, been"></div>
-                                    </div>
-                                        {{-- <div class="table-responsive">
-                                        <table class="table table-bordered table-stripped">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        Image preview
-                                                    </th>
-                                                    <th>
-                                                        Image url
-                                                    </th>
-                                                    <th>
-                                                        Sort order
-                                                    </th>
-                                                    <th>
-                                                        Actions
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/gallery/2s.jpg">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" disabled
-                                                            value="http://mydomain.com/images/image1.png">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" value="1">
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-white"><i class="fa fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/gallery/1s.jpg">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" disabled
-                                                            value="http://mydomain.com/images/image2.png">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" value="2">
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-white"><i class="fa fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/gallery/3s.jpg">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" disabled
-                                                            value="http://mydomain.com/images/image3.png">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" value="3">
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-white"><i class="fa fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/gallery/4s.jpg">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" disabled
-                                                            value="http://mydomain.com/images/image4.png">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" value="4">
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-white"><i class="fa fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/gallery/5s.jpg">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" disabled
-                                                            value="http://mydomain.com/images/image5.png">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" value="5">
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-white"><i class="fa fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/gallery/6s.jpg">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" disabled
-                                                            value="http://mydomain.com/images/image6.png">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" value="6">
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-white"><i class="fa fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/gallery/7s.jpg">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" disabled
-                                                            value="http://mydomain.com/images/image7.png">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" value="7">
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-white"><i class="fa fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div> --}}
+                                        <fieldset form="blogForm" class="form-horizontal">
+                                            <div class="form-group"><label class="col-sm-2 control-label">Meta Tag
+                                                    Title:</label>
+                                                <div class="col-sm-10">
+                                                    <input name="images[]"
+                                                    value="{{ old('images') }}" type="file"
+                                                    class="form-control" multiple accept="image/*" placeholder="Lorem, Ipsum, has, been">
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+
 
                                     </div>
                                 </form>
@@ -408,21 +281,13 @@
 
 
 @section('custom-script')
+    <!-- SUMMERNOTE -->
+    <script src="{{ asset('assets/adminpanel') }}/js/plugins/summernote/summernote.min.js"></script>
+
     <script>
         $(document).ready(function() {
-
             $('.summernote').summernote();
-
         });
 
-        var edit = function() {
-            $('.click2edit').summernote({
-                focus: true
-            });
-        };
-        var save = function() {
-            var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
-            $('.click2edit').destroy();
-        };
     </script>
 @endsection

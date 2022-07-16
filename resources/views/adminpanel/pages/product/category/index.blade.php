@@ -116,6 +116,12 @@
 
 
 @section('custom-script')
+
+    <!-- Sweet alert -->
+    <script src="{{ asset('assets/adminpanel') }}/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <!-- datatables -->
+    <script src="{{ asset('assets/adminpanel') }}/js/plugins/dataTables/datatables.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('.dataTables-example').DataTable({

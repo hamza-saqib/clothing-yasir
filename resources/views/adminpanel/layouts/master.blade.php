@@ -12,7 +12,6 @@
     </div>
 
     @include('adminpanel.partials.script')
-    @yield('custom-script')
 </body>
 
 </html>

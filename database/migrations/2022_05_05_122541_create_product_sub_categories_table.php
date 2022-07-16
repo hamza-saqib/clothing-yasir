@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('slug')->unique();
 
             $table->foreignId('product_category_id');
-            $table->foreign('product_category_id')->references('id')->on('product_categories');
-            $table->foreignId('admin_id');
-            $table->foreign('admin_id')->references('id')->on('admins');
+            $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');
+            $table->foreignId('admin_id')->nullable();
+            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('set null');
 
             $table->softDeletes();
             $table->timestamps();

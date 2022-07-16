@@ -77,7 +77,7 @@
                                             <tr class="gradeX" id="row-{{ $category->id }}">
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $category->name }}</td>
-                                                <td>{{ $category->category->name }}</td>
+                                                <td>{{ $category->category ? $category->category->name : '' }}</td>
                                                 <td>{{ date('d-M-Y', strtotime($category->created_at)) }}</td>
 
 
@@ -119,6 +119,12 @@
 
 
 @section('custom-script')
+
+    <!-- Sweet alert -->
+    <script src="{{ asset('assets/adminpanel') }}/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <!-- datatables -->
+    <script src="{{ asset('assets/adminpanel') }}/js/plugins/dataTables/datatables.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('.dataTables-example').DataTable({

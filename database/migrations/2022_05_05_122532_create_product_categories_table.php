@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
 
-            $table->foreignId('admin_id');
-            $table->foreign('admin_id')->references('id')->on('admins');
+            $table->foreignId('admin_id')->nullable();
+            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('set null');
 
             $table->softDeletes();
             $table->timestamps();

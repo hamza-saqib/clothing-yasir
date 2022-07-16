@@ -45,51 +45,40 @@ class ProductController extends Controller
         // return $request->all();
         $this->validate($request, [
             'name' => 'required|string',
-            'product_category_id' => 'required|integer',
+            'product_category_id' => 'required|integer|exists:product_categories,id',
+            'product_sub_category_id' => 'nullable|integer|exists:product_sub_categories,id',
+            'images[]' => 'nullable|file',
+            'price' => 'nullable|numeric',
+            'brand' => 'nullable|string',
+            'summary' => 'nullable|string',
             'description' => 'nullable|string',
+            'status' => 'nullable',
+            'sizes[]' => 'nullable|array',
+            'colors[]' => 'nullable|array',
         ]);
 
-        $input = $request->input();
+        $inputs = $request->input();
+        $inputs['sizes'] = json_encode($request->sizes);
+        $inputs['colors'] = json_encode($request->colors);
 
-        // if ($request->hasFile('image1')) {
-        //     $image = $request->file('image1');
-        //     $name=time().'_'.$image->getClientOriginalName();
-        //     $image->move(public_path().'/storage/images/products', $name);
-        //     $input['image1'] = $name;
-        // }
+        if($request->hasFile('images'))
+        {
+            $names = [];
+            foreach($request->file('images') as $image)
+            {
+                $destinationPath = public_path().'/storage/images/products';
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $image->move($destinationPath, $filename);
+                array_push($names, $filename);
 
-        // if ($request->hasFile('image2')) {
-        //     $image = $request->file('image2');
-        //     $name=time().'_'.$image->getClientOriginalName();
-        //     $image->move(public_path().'/storage/images/products', $name);
-        //     $input['image2'] = $name;
-        // }
+            }
+            $inputs['images'] = json_encode($names);
+        }
 
-        // if ($request->hasFile('image3')) {
-        //     $image = $request->file('image3');
-        //     $name=time().'_'.$image->getClientOriginalName();
-        //     $image->move(public_path().'/storage/images/products', $name);
-        //     $input['image3'] = $name;
-        // }
+        $inputs['admin_id'] = Auth::id();
+        $inputs['slug'] = Str::slug($request->name);
 
-        // if ($request->hasFile('image4')) {
-        //     $image = $request->file('image4');
-        //     $name=time().'_'.$image->getClientOriginalName();
-        //     $image->move(public_path().'/storage/images/products', $name);
-        //     $input['image4'] = $name;
-        // }
-
-        // if ($request->hasFile('image5')) {
-        //     $image = $request->file('image5');
-        //     $name=time().'_'.$image->getClientOriginalName();
-        //     $image->move(public_path().'/storage/images/products', $name);
-        //     $input['image5'] = $name;
-        // }
-
-        $input['admin_id'] = Auth::id();
-        $input['slug'] = Str::slug($request->name);
-
-        Product::create($input);
+        Product::create($inputs);
 
         return redirect()->route('admin.product.index')->with('success', 'Created Successfuly !');
     }

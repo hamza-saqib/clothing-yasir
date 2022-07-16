@@ -93,8 +93,8 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <a target="_blank" href="{{ route('product.show', [$product->industry, $product]) }}"
-                                                            class="btn-white btn btn-xs">View</a>
+                                                        <a target="_blank" href=""
+                                                            class="btn-white btn btn-xs">Preview</a>
                                                         <a href="{{ route('admin.product.edit', $product) }}"
                                                             class="btn-white btn btn-xs">Edit</a>
                                                         <button onclick="deleteRecord({{ $product->id }})"
@@ -134,6 +134,12 @@
 
 
 @section('custom-script')
+
+    <!-- Sweet alert -->
+    <script src="{{ asset('assets/adminpanel') }}/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <!-- datatables -->
+    <script src="{{ asset('assets/adminpanel') }}/js/plugins/dataTables/datatables.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('.dataTables-example').DataTable({

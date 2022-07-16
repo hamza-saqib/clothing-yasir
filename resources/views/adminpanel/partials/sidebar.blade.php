@@ -62,11 +62,11 @@
             <li class="@if (request()->is('admin/user*'))  {{'active'}} @else {{''}} @endif">
                 <a href="#">
                     <i class="fa fa-users"></i>
-                    <span class="nav-label">Users</span>
+                    <span class="nav-label">Web Users</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="{{ route('admin.user.index') }}">List</a></li>
+                    <li><a href="{{ route('admin.user.index') }}">Manage Users</a></li>
                 </ul>
             </li>
 
@@ -81,6 +81,17 @@
                     <li><a href="{{ route('admin.blog.index') }}">List</a></li>
                     <li><a href="{{ route('admin.blog-category.index') }}">Manage Category</a></li>
                 </ul>
+            </li>
+
+            <li class="@if (request()->is('admin/blog*'))  {{'active'}} @else {{''}} @endif">
+                <a href="#">
+                    <i class="fa fa-file-text"></i>
+                    <span class="nav-label">Admin Users</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('admin.blog.create') }}">Manage Admin</a></li>
+                 </ul>
             </li>
 
 
