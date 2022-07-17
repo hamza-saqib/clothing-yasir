@@ -1,24 +1,24 @@
-name: Deploy on Production
-on:
-  push:
-    branches:
-      - main
-jobs:
-  web-deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-    steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2.3.2
+# name: Deploy on Production
+# on:
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   web-deploy:
+#     name: Deploy
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: 🚚 Get latest code
+#       uses: actions/checkout@v2.3.2
 
-    - name: Install Dependencies
-      run: composer install --optimize-autoloader --no-dev
-      
-    - name: 📂 Sync files using FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
-      with:
-        # server: premium231.web-hosting.com
-        server: ftp.wayneincorporation.com
-        username: ${{ secrets.FTP_USER_NAME }}
-        password: ${{ secrets.FTP_USER_PASSWORD }}
-        # server-dir: /clothing.wayneincorporation.com/
+#     - name: Install Dependencies
+#       run: composer install --optimize-autoloader --no-dev
+
+#     - name: 📂 Sync files using FTP
+#       uses: SamKirkland/FTP-Deploy-Action@4.0.0
+#       with:
+#         # server: premium231.web-hosting.com
+#         server: ftp.wayneincorporation.com
+#         username: ${{ secrets.FTP_USER_NAME }}
+#         password: ${{ secrets.FTP_USER_PASSWORD }}
+#         # server-dir: /clothing.wayneincorporation.com/

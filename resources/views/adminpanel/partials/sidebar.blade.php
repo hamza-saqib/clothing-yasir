@@ -41,8 +41,7 @@
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="{{ route('admin.product.create') }}">Create</a></li>
-                    <li><a href="{{ route('admin.product.index') }}">List</a></li>
+                    <li><a href="{{ route('admin.product.index') }}">Manage Products</a></li>
                     <li><a href="{{ route('admin.product.category.index') }}">Categories</a></li>
                     <li><a href="{{ route('admin.product.sub-category.index') }}">Sub Categories</a></li>
                 </ul>

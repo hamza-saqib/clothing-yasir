@@ -66,10 +66,9 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>ID</th>
                                             <th>Name</th>
+                                            <th>Category</th>
                                             <th>Summary</th>
-                                            <th>Industry / Page</th>
                                             <th>Date</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -79,12 +78,11 @@
                                         @foreach ($products as $product)
                                             <tr class="gradeX" id="row-{{ $product->id }}">
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td> {{ $product->id }} </td>
                                                 <td>{{ $product->name }}</td>
+                                                <td>{{ $product->category ? $product->category->name : '' }}</td>
                                                 <td>{{ $product->summary }}</td>
-                                                <td>{{ $product->category->name }}</td>
-                                                <td>{{ date('d-M-Y', strtotime($product->created_at)) }}</td>
-                                                <td>
+                                                <td class="text-right">{{ date('d-M-Y', strtotime($product->created_at)) }}</td>
+                                                <td class="text-center">
                                                     @if ($product->is_active)
                                                         <span class="label label-primary">Enable</span>
                                                     @else
@@ -108,10 +106,9 @@
                                     <tfoot>
                                         <tr>
                                             <th>No.</th>
-                                            <th>ID</th>
                                             <th>Name</th>
+                                            <th>Category</th>
                                             <th>Summary</th>
-                                            <th>Industry / Page</th>
                                             <th>Date</th>
                                             <th>Status</th>
                                             <th>Action</th>

@@ -66,7 +66,6 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
@@ -80,13 +79,12 @@
                                         @foreach ($users as $user)
                                             <tr class="gradeX" id="row-{{ $user->id }}">
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $user->id }}</td>
-                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->first_name . ' ' . $user->last_name }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->phone }}</td>
                                                 <td>{{ $user->address }}</td>
-                                                <td>{{ date('d-M-Y', strtotime($user->created_at)) }}</td>
-                                                <td>
+                                                <td class="text-right">{{ date('d-M-Y', strtotime($user->created_at)) }}</td>
+                                                <td class="text-center">
                                                     @if ($user->is_active)
                                                         <span class="label label-primary">Enable</span>
                                                     @else
@@ -110,7 +108,6 @@
                                     <tfoot>
                                         <tr>
                                             <th>No.</th>
-                                            <th>ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
@@ -137,6 +134,12 @@
 
 
 @section('custom-script')
+
+    <!-- Sweet alert -->
+    <script src="{{ asset('assets/adminpanel') }}/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <!-- datatables -->
+    <script src="{{ asset('assets/adminpanel') }}/js/plugins/dataTables/datatables.min.js"></script>
+    
     <script>
         $(document).ready(function() {
             $('.dataTables-example').DataTable({
