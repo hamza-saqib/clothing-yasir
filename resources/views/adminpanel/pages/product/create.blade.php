@@ -7,6 +7,9 @@
 @endsection
 
 @section('other-css')
+
+<link href="{{ asset('assets/adminpanel') }}/css/plugins/summernote/summernote.css" rel="stylesheet">
+<link href="{{ asset('assets/adminpanel') }}/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
 @endsection
 
 @section('content')

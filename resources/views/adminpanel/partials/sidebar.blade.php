@@ -89,7 +89,8 @@
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="{{ route('admin.blog.create') }}">Manage Admin</a></li>
+                    <li><a href="{{ route('admin.admin-user.create') }}">Create New</a></li>
+                    <li><a href="{{ route('admin.admin-user.index') }}">Manage Admin</a></li>
                  </ul>
             </li>
 

@@ -113,7 +113,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     });
 
     // admins
-    Route::controller(App\Http\Controllers\Adminpanel\UserController::class)->prefix('admin-users')->name('admin-user.')->group(function () {
+    Route::controller(App\Http\Controllers\Adminpanel\AdminController::class)->prefix('admin-users')->name('admin-user.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');
