@@ -106,8 +106,8 @@
                     <div class="col-lg-7 col-md-10 d-none d-md-block">
                         <nav id="primary-menu">
                             <ul class="main-menu">
-                                <li class="current"><a class="active" href="index.html">Home</a></li>
-                                <li class="mega-parent pos-rltv"><a href="shop.html">Men</a>
+                                <li class="current"><a class="active" href="{{ route('index') }}">Home</a></li>
+                                <li class="mega-parent pos-rltv"><a href="{{ route('product.index') }}">Men</a>
                                     <div class="mega-menu-area mma-800">
                                         <ul class="single-mega-item">
                                             <li class="menu-title uppercase">Shirts</li>
@@ -130,7 +130,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="mega-parent pos-rltv"><a href="shop.html">Women</a>
+                                <li class="mega-parent pos-rltv"><a href="{{ route('product.index') }}">Women</a>
                                     <div class="mega-menu-area mma-700">
                                         <ul class="single-mega-item">
                                             <li class="menu-title uppercase">Shirts</li>
@@ -233,9 +233,9 @@
                                         </ul>
                                     </div>
                                 </li> -->
-                                <li ><a href="about-us.html">About</a>
+                                <li ><a href="{{ route('contact-us') }}">About</a>
                                     <ul class="dropdown">
-                                        <li><a href="about-us.html">About Us</a></li>
+                                        <li><a href="{{ route('contact-us') }}">About Us</a></li>
                                         <li><a href="shortcode-team.html">Team</a></li>
                                         <li><a href="shortcode-testimonial.html">Testimonial</a></li>
                                         <li><a href="shortcode-why-choose-us.html">Why Choose Us</a></li>
